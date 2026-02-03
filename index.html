@@ -26,7 +26,6 @@
         body {
             font-family: 'Lato', sans-serif;
             color: var(--text-color);
-            /* Parallax Background */
             background: url('https://images.unsplash.com/photo-1519225468359-2996bc15e556?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
             background-size: cover;
             min-height: 100vh;
@@ -34,7 +33,6 @@
             overflow-x: hidden;
         }
 
-        /* Overlay to darken background for better text readability */
         body::before {
             content: '';
             position: fixed;
@@ -52,7 +50,6 @@
             perspective: 1000px;
         }
 
-        /* Glassmorphism Card */
         .glass-form {
             background: var(--glass-bg);
             backdrop-filter: blur(16px);
@@ -159,7 +156,6 @@
             min-height: 100px;
         }
 
-        /* Checkbox and Radio Styles */
         .checkbox-group, .radio-group {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -187,7 +183,6 @@
             accent-color: var(--accent-color);
         }
 
-        /* Submit Button */
         .btn-submit {
             display: block;
             width: 100%;
@@ -210,32 +205,19 @@
             box-shadow: 0 10px 20px rgba(230, 126, 34, 0.4);
         }
 
-        .btn-submit:active {
-            transform: translateY(1px);
+        .btn-submit:disabled {
+            background: #7f8c8d;
+            cursor: not-allowed;
+            transform: none;
         }
 
-        /* Animations */
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Placeholder color correction */
-        ::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-        
-        /* Select option color correction for dropdowns */
-        option {
-            background: #2c3e50;
-            color: white;
-        }
+        ::placeholder { color: rgba(255, 255, 255, 0.6); }
+        option { background: #2c3e50; color: white; }
 
         @media (max-width: 600px) {
             header h1 { font-size: 2rem; }
@@ -256,72 +238,28 @@
         <form id="newspaperForm">
             <fieldset>
                 <legend>Basic Information</legend>
-                <div class="form-group">
-                    <label>Client Name</label>
-                    <input type="text" name="Client Name" required placeholder="Your Full Name">
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="Email" required placeholder="contact@example.com">
-                </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input type="tel" name="Client Phone" required placeholder="+91...">
-                </div>
-                <div class="form-group">
-                    <label>Event Name</label>
-                    <input type="text" name="Event Name" placeholder="e.g. Sarah & Mike’s Wedding">
-                </div>
-                <div class="form-group">
-                    <label>Event Date(s)</label>
-                    <input type="text" name="Event Date" placeholder="e.g. Oct 24th, 2024">
-                </div>
-                <div class="form-group">
-                    <label>Venue</label>
-                    <input type="text" name="Venue" placeholder="Name and Location">
-                </div>
+                <div class="form-group"><label>Client Name</label><input type="text" name="Client Name" required placeholder="Your Full Name"></div>
+                <div class="form-group"><label>Email</label><input type="email" name="Email" required placeholder="contact@example.com"></div>
+                <div class="form-group"><label>Phone Number</label><input type="tel" name="Client Phone" required placeholder="+91..."></div>
+                <div class="form-group"><label>Event Name</label><input type="text" name="Event Name" placeholder="e.g. Sarah & Mike’s Wedding"></div>
+                <div class="form-group"><label>Event Date(s)</label><input type="text" name="Event Date" placeholder="e.g. Oct 24th, 2024"></div>
+                <div class="form-group"><label>Venue</label><input type="text" name="Venue" placeholder="Name and Location"></div>
             </fieldset>
 
             <fieldset>
                 <legend>Event Details</legend>
-                <div class="form-group">
-                    <label>Schedule / Itinerary</label>
-                    <span class="sub-label">Outline the timeline (ceremony, dinner, party, etc.)</span>
-                    <textarea name="Schedule"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Key Events / Highlights</label>
-                    <span class="sub-label">Big moments like first dance, speeches, etc.</span>
-                    <textarea name="Key Highlights"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Theme or Mood</label>
-                    <input type="text" name="Theme" placeholder="e.g. Vintage, Rustic, Formal">
-                </div>
-                <div class="form-group">
-                    <label>Surprises / Special Elements</label>
-                    <textarea name="Surprises"></textarea>
-                </div>
+                <div class="form-group"><label>Schedule / Itinerary</label><span class="sub-label">Outline the timeline (ceremony, dinner, party, etc.)</span><textarea name="Schedule"></textarea></div>
+                <div class="form-group"><label>Key Events / Highlights</label><span class="sub-label">Big moments like first dance, speeches, etc.</span><textarea name="Key Highlights"></textarea></div>
+                <div class="form-group"><label>Theme or Mood</label><input type="text" name="Theme" placeholder="e.g. Vintage, Rustic, Formal"></div>
+                <div class="form-group"><label>Surprises / Special Elements</label><textarea name="Surprises"></textarea></div>
             </fieldset>
 
             <fieldset>
                 <legend>Key People</legend>
-                <div class="form-group">
-                    <label>Names of Celebrants</label>
-                    <input type="text" name="Celebrants" placeholder="Bride & Groom / Honorees">
-                </div>
-                <div class="form-group">
-                    <label>Family Members to Mention</label>
-                    <textarea name="Family Members"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Bridal Party / Friends</label>
-                    <textarea name="Bridal Party"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Honorees’ Occupations / Fun Titles</label>
-                    <textarea name="Occupations"></textarea>
-                </div>
+                <div class="form-group"><label>Names of Celebrants</label><input type="text" name="Celebrants" placeholder="Bride & Groom / Honorees"></div>
+                <div class="form-group"><label>Family Members to Mention</label><textarea name="Family Members"></textarea></div>
+                <div class="form-group"><label>Bridal Party / Friends</label><textarea name="Bridal Party"></textarea></div>
+                <div class="form-group"><label>Honorees’ Occupations / Fun Titles</label><textarea name="Occupations"></textarea></div>
             </fieldset>
 
             <fieldset>
@@ -337,29 +275,17 @@
                         <label class="check-item"><input type="checkbox" name="Photo Types" value="Behind Scenes"> Behind Scenes</label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Must-Have Shots</label>
-                    <textarea name="Must-Have Shots"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Photo Style Preference</label>
-                    <input type="text" name="Photo Style" placeholder="e.g. B&W, Casual, High-Res">
-                </div>
+                <div class="form-group"><label>Must-Have Shots</label><textarea name="Must-Have Shots"></textarea></div>
+                <div class="form-group"><label>Photo Style Preference</label><input type="text" name="Photo Style" placeholder="e.g. B&W, Casual, High-Res"></div>
             </fieldset>
 
             <fieldset>
                 <legend>Content & Style</legend>
                 <div class="form-group">
                     <label>Use of Humor/Fiction?</label>
-                    <select name="Use Humor">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
+                    <select name="Use Humor"><option value="Yes">Yes</option><option value="No">No</option></select>
                 </div>
-                <div class="form-group">
-                    <label>Topics to Avoid</label>
-                    <textarea name="Avoid Topics" placeholder="Sensitive subjects, etc."></textarea>
-                </div>
+                <div class="form-group"><label>Topics to Avoid</label><textarea name="Avoid Topics" placeholder="Sensitive subjects, etc."></textarea></div>
                 <div class="form-group">
                     <label>Overall Tone</label>
                     <div class="checkbox-group">
@@ -372,10 +298,7 @@
                 </div>
                 <div class="form-group">
                     <label>Format Preference</label>
-                    <select name="Format Preference">
-                        <option value="Tabloid (Small/Playful)">Tabloid (Small/Playful)</option>
-                        <option value="Broadsheet (Large/Formal)">Broadsheet (Large/Formal)</option>
-                    </select>
+                    <select name="Format Preference"><option value="Tabloid (Small/Playful)">Tabloid (Small/Playful)</option><option value="Broadsheet (Large/Formal)">Broadsheet (Large/Formal)</option></select>
                 </div>
             </fieldset>
 
@@ -387,87 +310,117 @@
                     <label class="check-item"><input type="checkbox" name="Special Sections" value="Games/Puzzles"> Games/Puzzles</label>
                     <label class="check-item"><input type="checkbox" name="Special Sections" value="Fun Awards"> Fun Awards</label>
                 </div>
-                <div class="form-group" style="margin-top: 15px;">
-                    <label>Other Ideas / Custom Requests</label>
-                    <textarea name="Other Ideas"></textarea>
-                </div>
+                <div class="form-group" style="margin-top: 15px;"><label>Other Ideas / Custom Requests</label><textarea name="Other Ideas"></textarea></div>
             </fieldset>
 
             <fieldset>
                 <legend>Additional Info</legend>
-                <div class="form-group">
-                    <label>Traditions / Rituals</label>
-                    <textarea name="Traditions"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>QR Codes / Links</label>
-                    <input type="text" name="QR Links" placeholder="Registry, Photo Album URL">
-                </div>
-                <div class="form-group">
-                    <label>Final Notes</label>
-                    <textarea name="Final Notes"></textarea>
-                </div>
+                <div class="form-group"><label>Traditions / Rituals</label><textarea name="Traditions"></textarea></div>
+                <div class="form-group"><label>QR Codes / Links</label><input type="text" name="QR Links" placeholder="Registry, Photo Album URL"></div>
+                <div class="form-group"><label>Final Notes</label><textarea name="Final Notes"></textarea></div>
             </fieldset>
 
-            <button type="submit" class="btn-submit">Submit & Send to WhatsApp</button>
+            <button type="submit" class="btn-submit">Submit & Send</button>
         </form>
     </div>
 </div>
 
 <script>
+    // YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxtvoeyX0AD5lZSRTkDKCe0dVRBollI5tspEO3sBRy1qCztSV0aLzBrlHFxCVSqyve35A/exec';
+
     document.getElementById('newspaperForm').addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        const submitBtn = document.querySelector('.btn-submit');
+        const originalBtnText = submitBtn.innerText;
+        
+        // 1. Indicate Processing
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Processing Details...";
 
         const form = e.target;
         const formData = new FormData(form);
-        let message = "*NEWSPAPER QUESTIONNAIRE SUBMISSION*\n\n";
+        
+        // 2. Process Data: Merge multiple checkboxes into single strings
+        const dataMap = {}; 
+        // We create a new FormData object specifically for the Sheet upload
+        const sheetData = new FormData();
 
-        // Grouping data for better readability in WhatsApp
+        // Helper: Collect all duplicate keys (checkboxes) into arrays
+        for (let [key, value] of formData.entries()) {
+            if (dataMap[key]) {
+                dataMap[key] = dataMap[key] + ", " + value;
+            } else {
+                dataMap[key] = value;
+            }
+        }
+
+        // Now populate sheetData with the merged strings so Apps Script reads them correctly
+        for (let key in dataMap) {
+            sheetData.append(key, dataMap[key]);
+        }
+
+        // 3. Construct Complete WhatsApp Message
+        let message = "*NEWSPAPER QUESTIONNAIRE SUBMISSION*\n\n";
+        
         message += "*--- BASIC INFO ---*\n";
-        message += `👤 *Client:* ${formData.get('Client Name') || 'N/A'}\n`;
-        message += `📧 *Email:* ${formData.get('Email') || 'N/A'}\n`;
-        message += `📱 *Phone:* ${formData.get('Client Phone') || 'N/A'}\n`;
-        message += `🎉 *Event:* ${formData.get('Event Name') || 'N/A'}\n`;
-        message += `📅 *Date:* ${formData.get('Event Date') || 'N/A'}\n`;
-        message += `📍 *Venue:* ${formData.get('Venue') || 'N/A'}\n\n`;
+        message += `👤 *Client:* ${dataMap['Client Name'] || 'N/A'}\n`;
+        message += `📧 *Email:* ${dataMap['Email'] || 'N/A'}\n`;
+        message += `📱 *Phone:* ${dataMap['Client Phone'] || 'N/A'}\n`;
+        message += `🎉 *Event:* ${dataMap['Event Name'] || 'N/A'}\n`;
+        message += `📅 *Date:* ${dataMap['Event Date'] || 'N/A'}\n`;
+        message += `📍 *Venue:* ${dataMap['Venue'] || 'N/A'}\n\n`;
 
         message += "*--- EVENT DETAILS ---*\n";
-        message += `📝 *Schedule:* ${formData.get('Schedule') || 'N/A'}\n`;
-        message += `✨ *Highlights:* ${formData.get('Key Highlights') || 'N/A'}\n`;
-        message += `🎨 *Theme:* ${formData.get('Theme') || 'N/A'}\n`;
-        message += `🎁 *Surprises:* ${formData.get('Surprises') || 'N/A'}\n\n`;
+        message += `📝 *Schedule:* ${dataMap['Schedule'] || 'N/A'}\n`;
+        message += `✨ *Highlights:* ${dataMap['Key Highlights'] || 'N/A'}\n`;
+        message += `🎨 *Theme:* ${dataMap['Theme'] || 'N/A'}\n`;
+        message += `🎁 *Surprises:* ${dataMap['Surprises'] || 'N/A'}\n\n`;
 
         message += "*--- KEY PEOPLE ---*\n";
-        message += `🥂 *Celebrants:* ${formData.get('Celebrants') || 'N/A'}\n`;
-        message += `👨‍👩‍👧 *Family:* ${formData.get('Family Members') || 'N/A'}\n`;
-        message += `👯 *Bridal Party:* ${formData.get('Bridal Party') || 'N/A'}\n\n`;
+        message += `🥂 *Celebrants:* ${dataMap['Celebrants'] || 'N/A'}\n`;
+        message += `👨‍👩‍👧 *Family:* ${dataMap['Family Members'] || 'N/A'}\n`;
+        message += `👯 *Bridal Party:* ${dataMap['Bridal Party'] || 'N/A'}\n`;
+        message += `👔 *Occupations:* ${dataMap['Occupations'] || 'N/A'}\n\n`;
 
-        message += "*--- DESIGN & PHOTO ---*\n";
-        // Handle Checkboxes manually for Photo Types
-        let photoTypes = [];
-        form.querySelectorAll('input[name="Photo Types"]:checked').forEach(el => photoTypes.push(el.value));
-        message += `📸 *Photo Types:* ${photoTypes.join(', ') || 'None'}\n`;
-        message += `🖼 *Must Haves:* ${formData.get('Must-Have Shots') || 'N/A'}\n`;
-        message += `🎭 *Tone:* ${formData.get('Theme') || 'N/A'}\n`;
-        
-        let tones = [];
-        form.querySelectorAll('input[name="Tone"]:checked').forEach(el => tones.push(el.value));
-        message += `✨ *Vibe:* ${tones.join(', ') || 'N/A'}\n`;
-        message += `📰 *Format:* ${formData.get('Format Preference')}\n\n`;
+        message += "*--- PHOTO & DESIGN ---*\n";
+        message += `📸 *Photo Types:* ${dataMap['Photo Types'] || 'None'}\n`;
+        message += `🖼 *Must Haves:* ${dataMap['Must-Have Shots'] || 'N/A'}\n`;
+        message += `🎞 *Style Pref:* ${dataMap['Photo Style'] || 'N/A'}\n`;
+        message += `🎭 *Use Humor:* ${dataMap['Use Humor'] || 'N/A'}\n`;
+        message += `🚫 *Avoid:* ${dataMap['Avoid Topics'] || 'N/A'}\n`;
+        message += `🎼 *Tone:* ${dataMap['Tone'] || 'N/A'}\n`;
+        message += `📰 *Format:* ${dataMap['Format Preference'] || 'N/A'}\n\n`;
 
-        message += "*--- EXTRA ---*\n";
-        message += `🔗 *QR/Links:* ${formData.get('QR Links') || 'N/A'}\n`;
-        message += `🗒 *Notes:* ${formData.get('Final Notes') || 'N/A'}`;
+        message += "*--- EXTRAS ---*\n";
+        message += `🧩 *Sections:* ${dataMap['Special Sections'] || 'None'}\n`;
+        message += `💡 *Other Ideas:* ${dataMap['Other Ideas'] || 'N/A'}\n`;
+        message += `🕯 *Traditions:* ${dataMap['Traditions'] || 'N/A'}\n`;
+        message += `🔗 *QR/Links:* ${dataMap['QR Links'] || 'N/A'}\n`;
+        message += `🗒 *Final Notes:* ${dataMap['Final Notes'] || 'N/A'}`;
 
-        // Encode the message for URL
-        const encodedMessage = encodeURIComponent(message);
-        
-        // Target WhatsApp Number
         const waNumber = "918910264234";
-        
-        // Open WhatsApp
-        const waURL = `https://wa.me/${waNumber}?text=${encodedMessage}`;
-        window.open(waURL, '_blank');
+        const waURL = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+
+        // 4. Send to Google Sheets (using FormData directly works with e.parameter)
+        fetch(scriptURL, { 
+            method: 'POST', 
+            body: sheetData // Sending FormData object, NOT JSON string
+        })
+        .then(response => {
+            console.log('Success!', response);
+            window.location.href = waURL; 
+        })
+        .catch(error => {
+            console.error('Error!', error.message);
+            alert("Note: Data saved to WhatsApp, but Google Sheet connection failed. Opening WhatsApp now.");
+            window.location.href = waURL;
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerText = originalBtnText;
+        });
     });
 </script>
 
