@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Newspaper Questionnaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --primary-color: #2c3e50;
+            --accent-color: #e67e22;
+            --text-color: #fff;
+            --input-bg: rgba(255, 255, 255, 0.2);
+            --input-focus: rgba(255, 255, 255, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-color);
+            /* Parallax Background */
+            background: url('https://images.unsplash.com/photo-1519225468359-2996bc15e556?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Overlay to darken background for better text readability */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            perspective: 1000px;
+        }
+
+        /* Glassmorphism Card */
+        .glass-form {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            padding: 40px;
+            animation: slideUp 1s ease-out;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 20px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        fieldset {
+            border: none;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        fieldset:hover {
+            background: rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        legend {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #fff;
+            padding: 0 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .sub-label {
+            font-size: 0.85rem;
+            font-weight: 300;
+            opacity: 0.8;
+            margin-top: -5px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--input-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Lato', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            background: var(--input-focus);
+            border-color: #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Checkbox and Radio Styles */
+        .checkbox-group, .radio-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .check-item:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .check-item input {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-color);
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(230, 126, 34, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Placeholder color correction */
+        ::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Select option color correction for dropdowns */
+        option {
+            background: #2c3e50;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .glass-form { padding: 20px; }
+            .checkbox-group { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="glass-form">
+        <header>
+            <h1>The Daily Edition</h1>
+            <p>Personalized Event Newspaper Questionnaire</p>
+        </header>
+
+        <form id="newspaperForm">
+            <fieldset>
+                <legend>Basic Information</legend>
+                <div class="form-group">
+                    <label>Client Name</label>
+                    <input type="text" name="Client Name" required placeholder="Your Full Name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="Email" required placeholder="contact@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" name="Client Phone" required placeholder="+91...">
+                </div>
+                <div class="form-group">
+                    <label>Event Name</label>
+                    <input type="text" name="Event Name" placeholder="e.g. Sarah & Mike’s Wedding">
+                </div>
+                <div class="form-group">
+                    <label>Event Date(s)</label>
+                    <input type="text" name="Event Date" placeholder="e.g. Oct 24th, 2024">
+                </div>
+                <div class="form-group">
+                    <label>Venue</label>
+                    <input type="text" name="Venue" placeholder="Name and Location">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Event Details</legend>
+                <div class="form-group">
+                    <label>Schedule / Itinerary</label>
+                    <span class="sub-label">Outline the timeline (ceremony, dinner, party, etc.)</span>
+                    <textarea name="Schedule"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Key Events / Highlights</label>
+                    <span class="sub-label">Big moments like first dance, speeches, etc.</span>
+                    <textarea name="Key Highlights"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Theme or Mood</label>
+                    <input type="text" name="Theme" placeholder="e.g. Vintage, Rustic, Formal">
+                </div>
+                <div class="form-group">
+                    <label>Surprises / Special Elements</label>
+                    <textarea name="Surprises"></textarea>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Key People</legend>
+                <div class="form-group">
+                    <label>Names of Celebrants</label>
+                    <input type="text" name="Celebrants" placeholder="Bride & Groom / Honorees">
+                </div>
+                <div class="form-group">
+                    <label>Family Members to Mention</label>
+                    <textarea name="Family Members"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Bridal Party / Friends</label>
+                    <textarea name="Bridal Party"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Honorees’ Occupations / Fun Titles</label>
+                    <textarea name="Occupations"></textarea>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Photo Guidance</legend>
+                <div class="form-group">
+                    <label>Photo Types to Include:</label>
+                    <div class="checkbox-group">
+                        <label class="check-item"><input type="checkbox" name="Photo Types" value="Couple Portraits"> Couple Portraits</label>
+                        <label class="check-item"><input type="checkbox" name="Photo Types" value="Family/Group"> Family/Group</label>
+                        <label class="check-item"><input type="checkbox" name="Photo Types" value="Childhood"> Childhood / Then & Now</label>
+                        <label class="check-item"><input type="checkbox" name="Photo Types" value="Ceremony"> Ceremony Highlights</label>
+                        <label class="check-item"><input type="checkbox" name="Photo Types" value="Candid"> Candid/Reception</label>
+                        <label class="check-item"><input type="checkbox" name="Photo Types" value="Behind Scenes"> Behind Scenes</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Must-Have Shots</label>
+                    <textarea name="Must-Have Shots"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Photo Style Preference</label>
+                    <input type="text" name="Photo Style" placeholder="e.g. B&W, Casual, High-Res">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Content & Style</legend>
+                <div class="form-group">
+                    <label>Use of Humor/Fiction?</label>
+                    <select name="Use Humor">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Topics to Avoid</label>
+                    <textarea name="Avoid Topics" placeholder="Sensitive subjects, etc."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Overall Tone</label>
+                    <div class="checkbox-group">
+                        <label class="check-item"><input type="checkbox" name="Tone" value="Elegant"> Elegant</label>
+                        <label class="check-item"><input type="checkbox" name="Tone" value="Romantic"> Romantic</label>
+                        <label class="check-item"><input type="checkbox" name="Tone" value="Fun/Humorous"> Fun/Humorous</label>
+                        <label class="check-item"><input type="checkbox" name="Tone" value="Vintage"> Vintage</label>
+                        <label class="check-item"><input type="checkbox" name="Tone" value="Modern"> Modern</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Format Preference</label>
+                    <select name="Format Preference">
+                        <option value="Tabloid (Small/Playful)">Tabloid (Small/Playful)</option>
+                        <option value="Broadsheet (Large/Formal)">Broadsheet (Large/Formal)</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Special Sections</legend>
+                <div class="checkbox-group">
+                    <label class="check-item"><input type="checkbox" name="Special Sections" value="Love Story"> Love Story/Timeline</label>
+                    <label class="check-item"><input type="checkbox" name="Special Sections" value="Friend Messages"> Friend Messages</label>
+                    <label class="check-item"><input type="checkbox" name="Special Sections" value="Games/Puzzles"> Games/Puzzles</label>
+                    <label class="check-item"><input type="checkbox" name="Special Sections" value="Fun Awards"> Fun Awards</label>
+                </div>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>Other Ideas / Custom Requests</label>
+                    <textarea name="Other Ideas"></textarea>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Additional Info</legend>
+                <div class="form-group">
+                    <label>Traditions / Rituals</label>
+                    <textarea name="Traditions"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>QR Codes / Links</label>
+                    <input type="text" name="QR Links" placeholder="Registry, Photo Album URL">
+                </div>
+                <div class="form-group">
+                    <label>Final Notes</label>
+                    <textarea name="Final Notes"></textarea>
+                </div>
+            </fieldset>
+
+            <button type="submit" class="btn-submit">Submit & Send to WhatsApp</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('newspaperForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const formData = new FormData(form);
+        let message = "*NEWSPAPER QUESTIONNAIRE SUBMISSION*\n\n";
+
+        // Grouping data for better readability in WhatsApp
+        message += "*--- BASIC INFO ---*\n";
+        message += `👤 *Client:* ${formData.get('Client Name') || 'N/A'}\n`;
+        message += `📧 *Email:* ${formData.get('Email') || 'N/A'}\n`;
+        message += `📱 *Phone:* ${formData.get('Client Phone') || 'N/A'}\n`;
+        message += `🎉 *Event:* ${formData.get('Event Name') || 'N/A'}\n`;
+        message += `📅 *Date:* ${formData.get('Event Date') || 'N/A'}\n`;
+        message += `📍 *Venue:* ${formData.get('Venue') || 'N/A'}\n\n`;
+
+        message += "*--- EVENT DETAILS ---*\n";
+        message += `📝 *Schedule:* ${formData.get('Schedule') || 'N/A'}\n`;
+        message += `✨ *Highlights:* ${formData.get('Key Highlights') || 'N/A'}\n`;
+        message += `🎨 *Theme:* ${formData.get('Theme') || 'N/A'}\n`;
+        message += `🎁 *Surprises:* ${formData.get('Surprises') || 'N/A'}\n\n`;
+
+        message += "*--- KEY PEOPLE ---*\n";
+        message += `🥂 *Celebrants:* ${formData.get('Celebrants') || 'N/A'}\n`;
+        message += `👨‍👩‍👧 *Family:* ${formData.get('Family Members') || 'N/A'}\n`;
+        message += `👯 *Bridal Party:* ${formData.get('Bridal Party') || 'N/A'}\n\n`;
+
+        message += "*--- DESIGN & PHOTO ---*\n";
+        // Handle Checkboxes manually for Photo Types
+        let photoTypes = [];
+        form.querySelectorAll('input[name="Photo Types"]:checked').forEach(el => photoTypes.push(el.value));
+        message += `📸 *Photo Types:* ${photoTypes.join(', ') || 'None'}\n`;
+        message += `🖼 *Must Haves:* ${formData.get('Must-Have Shots') || 'N/A'}\n`;
+        message += `🎭 *Tone:* ${formData.get('Theme') || 'N/A'}\n`;
+        
+        let tones = [];
+        form.querySelectorAll('input[name="Tone"]:checked').forEach(el => tones.push(el.value));
+        message += `✨ *Vibe:* ${tones.join(', ') || 'N/A'}\n`;
+        message += `📰 *Format:* ${formData.get('Format Preference')}\n\n`;
+
+        message += "*--- EXTRA ---*\n";
+        message += `🔗 *QR/Links:* ${formData.get('QR Links') || 'N/A'}\n`;
+        message += `🗒 *Notes:* ${formData.get('Final Notes') || 'N/A'}`;
+
+        // Encode the message for URL
+        const encodedMessage = encodeURIComponent(message);
+        
+        // Target WhatsApp Number
+        const waNumber = "918910264234";
+        
+        // Open WhatsApp
+        const waURL = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+        window.open(waURL, '_blank');
+    });
+</script>
+
+</body>
+</html>
